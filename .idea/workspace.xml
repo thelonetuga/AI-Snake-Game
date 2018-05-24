@@ -73,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/SnakeAI/src/snake/Environment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
-              <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+              <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5817#5818#0" expanded="true" />
@@ -216,8 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -292,7 +291,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -455,6 +455,7 @@
       <workItem from="1527081978554" duration="88000" />
       <workItem from="1527106980680" duration="4811000" />
       <workItem from="1527152905058" duration="85000" />
+      <workItem from="1527153423296" duration="46000" />
     </task>
     <task id="LOCAL-00001">
       <created>1523621897278</created>
@@ -579,7 +580,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131425000" />
+    <option name="totallyTimeSpent" value="131471000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -602,8 +603,8 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3144385" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32876712" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32990867" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
@@ -613,8 +614,8 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40981734" />
+      <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="SVN Repositories" order="8" weight="0.32990867" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -992,7 +993,7 @@
     <entry file="file://$PROJECT_DIR$/SnakeAI/src/snake/Environment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
-          <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5817#5818#0" expanded="true" />
