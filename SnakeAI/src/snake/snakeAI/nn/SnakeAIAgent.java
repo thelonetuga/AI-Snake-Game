@@ -50,6 +50,18 @@ public class SnakeAIAgent extends SnakeAgent {
     }
 
 
+    public int getInputLayerSize() {
+        return inputLayerSize;
+    }
+
+    public double[][] getW1() {
+        return w1;
+    }
+
+    public double[][] getW2() {
+        return w2;
+    }
+
     /**
      * Initializes the network's weights
      * 
@@ -57,6 +69,7 @@ public class SnakeAIAgent extends SnakeAgent {
      */
     public void setWeights(double[] weights) {
         int w = 0;
+
         //percorrer os pesos w1
         for (int i = 0; i < inputLayerSize; i++) {
             for (int j = 0; j < hiddenLayerSize; j++) {

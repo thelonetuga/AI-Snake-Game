@@ -2,7 +2,7 @@ package snake.snakeAI.ga;
 
 public abstract class Individual<P extends Problem, I extends Individual> implements Comparable<I>{
 
-    protected double fitness;
+    protected  double fitness;
     protected P problem;
 
     public Individual(P problem) {

@@ -104,16 +104,15 @@ public class Environment {
     }
 
     public int[] simulateAI() {
-        int[] vetorEstatisticas = new int[2];  //vetorEstatisticas[numMovs,numFood]
+        int[] vetorEstatisticas = new int[2];
         for (int i = 0; i < maxIterations; i++){
             for (SnakeAgent agent: agents){
                 if(!agent.isKilled()) {
                     agent.act(this);
                     fireUpdatedEnvironment();
                 }else{
-                    vetorEstatisticas[0] = i;   // i = num Movs
+                    vetorEstatisticas[0] = i;
                     vetorEstatisticas[1] = getNumFood();
-                    System.out.println("Morreu.  Foods: "+vetorEstatisticas[1] + " Movs: "+vetorEstatisticas[0]);
                     return vetorEstatisticas;
                 }
             }

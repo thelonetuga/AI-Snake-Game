@@ -42,6 +42,8 @@ public class GeneticAlgorithm<I extends Individual, P extends Problem<I>> {
         t = 0;
         fireGenerationEnded(new GAEvent(this));
 
+
+
         while (!stopCondition(t)) {
             Population<I, P> populationAux = selection.run(population);
             recombination(populationAux);
@@ -53,6 +55,11 @@ public class GeneticAlgorithm<I extends Individual, P extends Problem<I>> {
                 bestInRun = (I) bestInGen.clone();
             }
             t++;
+
+            if (t == 200) {
+                System.out.println("debug");
+            }
+
             fireGenerationEnded(new GAEvent(this));
         }
         fireRunEnded(new GAEvent(this));

@@ -13,7 +13,7 @@ import java.util.Random;
 public class SnakeProblem implements Problem<SnakeIndividual> {
     private static final int NUM_NN_INPUTS = 9; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
     private static final int NUM_NN_OUTPUTS = 4; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
-    private static final int GENOME_SIZE = 134; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
+    private static final int GENOME_SIZE = 140; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
 
     final private int environmentSize;
     final private int type;
@@ -39,7 +39,7 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
 
     @Override
     public SnakeIndividual getNewIndividual() {
-        return new SnakeIndividual(this, GENOME_SIZE , environment.getRandom()/*TODO?*/);
+        return new SnakeIndividual(this, GENOME_SIZE /*TODO?*/);
     }
 
     public Environment getEnvironment() {

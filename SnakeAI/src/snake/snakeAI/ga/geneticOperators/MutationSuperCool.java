@@ -1,5 +1,6 @@
 package snake.snakeAI.ga.geneticOperators;
 
+import snake.snakeAI.ga.GeneticAlgorithm;
 import snake.snakeAI.ga.RealVectorIndividual;
 
 import java.util.Random;
@@ -17,7 +18,7 @@ public class MutationSuperCool<I extends RealVectorIndividual> extends Mutation<
     public void run(I ind) {
         for (int i = 0; i < ind.getNumGenes(); i++) {
             if (rand.nextDouble()<probability){
-                ind.setGene(i, 2*ind.getGene(i));
+                ind.setGene(i, ind.getGene(i) *1.2); // 2*ind.getGene(i));
             }
         }
     }
