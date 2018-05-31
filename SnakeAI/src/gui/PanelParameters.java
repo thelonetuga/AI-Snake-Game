@@ -23,11 +23,11 @@ public class PanelParameters extends PanelAtributesValue {
 
     // TODO MODIFY TO CHANGE THE DEFAULT PARAMETER VALUES
     public static final String SEED = "1";
-    public static final String POPULATION_SIZE = "200";
-    public static final String GENERATIONS = "1000";
+    public static final String POPULATION_SIZE = "500";
+    public static final String GENERATIONS = "2000";
     public static final String TOURNAMENT_SIZE = "4";
-    public static final String PROB_RECOMBINATION = "0.7";
-    public static final String PROB_MUTATION = "0.7";
+    public static final String PROB_RECOMBINATION = "0.9";
+    public static final String PROB_MUTATION = "0.05";
 
     JTextField textFieldSeed = new JTextField(SEED, TEXT_FIELD_LENGHT);
     JTextField textFieldN = new JTextField(POPULATION_SIZE, TEXT_FIELD_LENGHT);

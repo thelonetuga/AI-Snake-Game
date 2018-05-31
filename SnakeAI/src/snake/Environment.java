@@ -1,6 +1,7 @@
 package snake;
 
 import snake.snakeAI.nn.SnakeAIAgent;
+import snake.snakeAI.nn.SnakeAIAgent2;
 import snake.snakeAdhoc.SnakeAdhocAgent;
 import snake.snakeRandom.SnakeRandomAgent;
 
@@ -15,16 +16,22 @@ public class Environment {
     private final Cell[][] grid;
 
     private final List<SnakeAgent> agents;
+    private final int numOutputs;
+    private final int numInputs;
     private Food food ;
     private final int maxIterations;
     private final int type;
     private int numFood;
     private int numMov;
+    private int numHiddenUnits;
 
-    public Environment(int size, int maxIterations, int type) {
+    public Environment(int size, int maxIterations, int type, int numHiddenUnits, int numInputs, int numOutputs) {
 
         this.maxIterations = maxIterations;
         this.type = type;
+        this.numHiddenUnits = numHiddenUnits;
+        this.numInputs = numInputs;
+        this.numOutputs = numOutputs;
         this.grid = new Cell[size][size];
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid.length; j++) {
@@ -68,8 +75,26 @@ public class Environment {
                     agents.add(snakeRandomAgent);
                     break;
                 case 2:
-                    SnakeAIAgent snakeAIAgent = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), 9,10,4,Environment.this);
+                    SnakeAIAgent snakeAIAgent = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
                     agents.add(snakeAIAgent);
+                    break;
+                case 3:
+                    SnakeAIAgent2 snakeAIAgent2 = new SnakeAIAgent2(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
+                    agents.add(snakeAIAgent2);
+                    break;
+                case 4:
+                    SnakeAIAgent snakeEqual = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
+                    agents.add(snakeEqual);
+
+                    snakeEqual = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
+                    agents.add(snakeEqual);
+                    break;
+                case 5:
+                    SnakeAIAgent snakeDiferent = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
+                    agents.add(snakeDiferent);
+
+                    snakeDiferent = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
+                    agents.add(snakeDiferent);
                     break;
             }
     }
@@ -87,7 +112,7 @@ public class Environment {
     }
 
     public void simulate()  {
-        int i = 0;
+        int i;
         numMov=0;
         for ( i = 0; i < maxIterations; i++){
             for (SnakeAgent agent: agents){

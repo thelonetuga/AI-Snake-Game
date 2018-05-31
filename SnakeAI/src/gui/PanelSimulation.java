@@ -3,6 +3,7 @@ package gui;
 import snake.Environment;
 import snake.EnvironmentListener;
 import snake.snakeAI.nn.SnakeAIAgent;
+import snake.snakeAI.nn.SnakeAIAgent2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,18 +59,28 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
                int type = environment.getType();
                 try {
                     int environmentSimulations = mainFrame.getProblem().getNumEvironmentSimulations();
-                    if (type != 2 ){
+                    if (type < 2 ){
                         for (int i = 0; i < environmentSimulations; i++) {
                             environment.initialize(i);
                             environmentUpdated();
                             environment.simulate();
                         }
-                    }else{
+                    }else if(type == 2 || type == 4){
                         for (int i = 0; i < environmentSimulations; i++) {
                             environment.initialize(i);
                             if(mainFrame.getBestInRun() != null ){
                                 SnakeAIAgent aiAgent = (SnakeAIAgent) environment.getAgents().get(0);
                                 aiAgent.setWeights(mainFrame.getBestInRun().getGenome());
+                            }
+                            environment.simulateAI();
+                            environmentUpdated();
+                        }
+                    }else if(type == 3){
+                        for (int i = 0; i < environmentSimulations; i++) {
+                            environment.initialize(i);
+                            if(mainFrame.getBestInRun() != null ){
+                                SnakeAIAgent2 aiAgent2 = (SnakeAIAgent2) environment.getAgents().get(0);
+                                aiAgent2.setWeights(mainFrame.getBestInRun().getGenome());
                             }
                             environment.simulateAI();
                             environmentUpdated();

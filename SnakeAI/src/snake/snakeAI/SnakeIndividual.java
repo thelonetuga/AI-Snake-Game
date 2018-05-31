@@ -4,21 +4,21 @@ import snake.Environment;
 import snake.SnakeAgent;
 import snake.snakeAI.ga.RealVectorIndividual;
 import snake.snakeAI.nn.SnakeAIAgent;
+import snake.snakeAI.nn.SnakeAIAgent2;
 
 import java.awt.*;
 import java.util.Random;
 
 public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeIndividual> {
-    private int numFoods;
-    private int numMov;
-    private double[][] w1;
-    private double[][] w2;
+    protected int numFoods;
+    protected int numMov;
+
 
     public SnakeIndividual(SnakeProblem problem, int size) {
         super(problem, size);
         //TODO?
         numFoods =0;
-        numMov  = 0;
+        numMov = 0;
         fitness= 0;
     }
 
@@ -46,23 +46,49 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         int enviromentSimulations = problem.getNumEvironmentSimulations();
         Environment environment = problem.getEnvironment();
         SnakeAIAgent aiAgent;
+        SnakeAIAgent aiAgentEqual;
+        SnakeAIAgent aiAgentEqual2;
+        SnakeAIAgent2 aiAgent2;
         fitness= 0;
         numFoods= 0;
          numMov=0;
          int[] vetorEstatisticas = new int[]{0,0};
+        int[] vetorEstatisticas2 = new int[]{0,0};
 
         for (int i = 0; i < enviromentSimulations; i++){
             problem.getEnvironment().initialize(i);
-            aiAgent = (SnakeAIAgent) environment.getAgents().get(0);
-            aiAgent.setWeights(genome);
-            w1  =  aiAgent.getW1();
-            w2  =  aiAgent.getW2();
-            vetorEstatisticas =environment.simulateAI();
-            numFoods+= vetorEstatisticas[1];
-            numMov += vetorEstatisticas[0];
+            int type = environment.getType();
+            if (type == 2){
+                aiAgent = (SnakeAIAgent) environment.getAgents().get(0);
+                aiAgent.setWeights(genome);
+                vetorEstatisticas =environment.simulateAI();
+                numFoods+= vetorEstatisticas[1];
+                numMov += vetorEstatisticas[0];
+                fitness= ((numFoods*20 + numMov*0.01)/enviromentSimulations);
+            }else if (type == 3){
+                aiAgent2 = (SnakeAIAgent2) environment.getAgents().get(0);
+                aiAgent2.setWeights(genome);
+                vetorEstatisticas =environment.simulateAI();
+                numFoods+= vetorEstatisticas[1];
+                numMov += vetorEstatisticas[0];
+                fitness= ((numFoods*50 + numMov*0.01)/enviromentSimulations);
+            }else if (type == 4){
+                aiAgentEqual2 = (SnakeAIAgent) environment.getAgents().get(0);
+                aiAgentEqual = (SnakeAIAgent) environment.getAgents().get(1);
+                aiAgentEqual2.setWeights(genome);
+                aiAgentEqual.setWeights(genome);
+                vetorEstatisticas =environment.simulateAI();
+                vetorEstatisticas2 =environment.simulateAI();
+                numFoods+= vetorEstatisticas[1];
+                numMov += vetorEstatisticas[0];
+                fitness= ((numFoods*200 + numMov*0.9)/enviromentSimulations);
+            }
+
+            numFoods+= vetorEstatisticas2[1];
+            numMov += vetorEstatisticas2[0];
 
         }
-        fitness= ((numFoods*1000 + numMov*0.1)/enviromentSimulations);
+
         return  fitness;
     }
 
@@ -79,10 +105,6 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         sb.append(numMov/problem.getNumEvironmentSimulations());
         sb.append("\nNumber of Foods: ");
         sb.append(numFoods/problem.getNumEvironmentSimulations());
-        sb.append("\nWeights w1: ");
-        sb.append(w1);
-        sb.append("\nWeights w2: ");
-        sb.append(w2);
         return sb.toString();
     }
 

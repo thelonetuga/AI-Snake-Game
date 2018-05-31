@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Random;
 
 public class SnakeProblem implements Problem<SnakeIndividual> {
-    private static final int NUM_NN_INPUTS = 9; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
-    private static final int NUM_NN_OUTPUTS = 4; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
-    private static final int GENOME_SIZE = 140; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
+   // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
+    // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
+    private int GENOME_SIZE ; // TODO THIS IS A FAKE NUMBER; PLEASE ADAPT TO YOUR CASE
 
     final private int environmentSize;
     final private int type;
@@ -25,20 +25,21 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
 
     final private Environment environment;
 
-    public SnakeProblem(int environmentSize, int maxIterations, int numHiddenUnits, int numEnvironmentRuns, int type) {
+    public SnakeProblem(int environmentSize, int maxIterations, int numHiddenUnits, int numEnvironmentRuns, int type, int numInputs, int numOutputs) {
         this.environmentSize = environmentSize;
         this.maxIterations = maxIterations;
-        this.numInputs = NUM_NN_INPUTS;
+        this.numInputs = numInputs;
         this.numHiddenUnits = numHiddenUnits;
-        this.numOutputs = NUM_NN_OUTPUTS;
+        this.numOutputs = numOutputs;
         this.numEnvironmentRuns = numEnvironmentRuns;
         this.type = type;
 
-        environment = new Environment(environmentSize, maxIterations, type);
+        environment = new Environment(environmentSize, maxIterations, type, numHiddenUnits, numInputs, numOutputs);
     }
 
     @Override
     public SnakeIndividual getNewIndividual() {
+        GENOME_SIZE = numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
         return new SnakeIndividual(this, GENOME_SIZE /*TODO?*/);
     }
 
@@ -74,13 +75,15 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
         int numHiddenUnits = Integer.parseInt(parametersValues.get(2));
         int numEnvironmentRuns = Integer.parseInt(parametersValues.get(3));
         int type = Integer.parseInt(parametersValues.get(4));
+        int numInputs = Integer.parseInt(parametersValues.get(5));
+        int numOutputs = Integer.parseInt(parametersValues.get(6));
 
 
         return new SnakeProblem(
                 environmentSize,
                 maxIterations,
                 numHiddenUnits,
-                numEnvironmentRuns, type);
+                numEnvironmentRuns, type, numInputs, numOutputs);
     }
 
     // MODIFY IF YOU DEFINE OTHER PARAMETERS
