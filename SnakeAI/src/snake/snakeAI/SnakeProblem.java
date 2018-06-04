@@ -39,8 +39,12 @@ public class SnakeProblem implements Problem<SnakeIndividual> {
 
     @Override
     public SnakeIndividual getNewIndividual() {
-        GENOME_SIZE = numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
-        return new SnakeIndividual(this, GENOME_SIZE /*TODO?*/);
+        if (type == 5){
+            GENOME_SIZE = (numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs)+(13*15+(15+1)*8);
+        }else{
+            GENOME_SIZE = numInputs*numHiddenUnits+(numHiddenUnits+1)*numOutputs;
+        }
+        return new SnakeIndividual(this, GENOME_SIZE);
     }
 
     public Environment getEnvironment() {

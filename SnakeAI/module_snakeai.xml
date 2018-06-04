@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_snakeai" default="compile.module.snakeai">
+  <dirname property="module.snakeai.basedir" file="${ant.file.module_snakeai}"/>
+  
+  <property name="module.jdk.home.snakeai" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.snakeai" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.snakeai" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.snakeai" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="snakeai.output.dir" value="${module.snakeai.basedir}/../out/production/SnakeAI"/>
+  <property name="snakeai.testoutput.dir" value="${module.snakeai.basedir}/../out/test/SnakeAI"/>
+  
+  <path id="snakeai.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="snakeai.module.production.classpath">
+    <path refid="${module.jdk.classpath.snakeai}"/>
+    <path refid="library.snakeai.classpath"/>
+  </path>
+  
+  <path id="snakeai.runtime.production.module.classpath">
+    <pathelement location="${snakeai.output.dir}"/>
+    <path refid="library.snakeai.classpath"/>
+  </path>
+  
+  <path id="snakeai.module.classpath">
+    <path refid="${module.jdk.classpath.snakeai}"/>
+    <pathelement location="${snakeai.output.dir}"/>
+    <path refid="library.snakeai.classpath"/>
+  </path>
+  
+  <path id="snakeai.runtime.module.classpath">
+    <pathelement location="${snakeai.testoutput.dir}"/>
+    <pathelement location="${snakeai.output.dir}"/>
+    <path refid="library.snakeai.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.snakeai">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.snakeai">
+    <patternset refid="excluded.from.module.snakeai"/>
+  </patternset>
+  
+  <path id="snakeai.module.sourcepath">
+    <dirset dir="${module.snakeai.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.snakeai" depends="compile.module.snakeai.production,compile.module.snakeai.tests" description="Compile module SnakeAI"/>
+  
+  <target name="compile.module.snakeai.production" depends="register.custom.compilers" description="Compile module SnakeAI; production classes">
+    <mkdir dir="${snakeai.output.dir}"/>
+    <javac2 destdir="${snakeai.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.snakeai}/javac">
+      <compilerarg line="${compiler.args.snakeai}"/>
+      <bootclasspath refid="snakeai.module.bootclasspath"/>
+      <classpath refid="snakeai.module.production.classpath"/>
+      <src refid="snakeai.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.snakeai"/>
+    </javac2>
+    
+    <copy todir="${snakeai.output.dir}">
+      <fileset dir="${module.snakeai.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.snakeai.tests" depends="register.custom.compilers,compile.module.snakeai.production" description="compile module SnakeAI; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.snakeai" description="cleanup module">
+    <delete dir="${snakeai.output.dir}"/>
+    <delete dir="${snakeai.testoutput.dir}"/>
+  </target>
+</project>

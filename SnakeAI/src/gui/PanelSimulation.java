@@ -65,15 +65,15 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
                             environmentUpdated();
                             environment.simulate();
                         }
-                    }else if(type == 2 || type == 4){
+                    }else if(type == 2){
                         for (int i = 0; i < environmentSimulations; i++) {
                             environment.initialize(i);
                             if(mainFrame.getBestInRun() != null ){
                                 SnakeAIAgent aiAgent = (SnakeAIAgent) environment.getAgents().get(0);
                                 aiAgent.setWeights(mainFrame.getBestInRun().getGenome());
                             }
-                            environment.simulateAI();
                             environmentUpdated();
+                            environment.simulateAI();
                         }
                     }else if(type == 3){
                         for (int i = 0; i < environmentSimulations; i++) {
@@ -82,8 +82,38 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
                                 SnakeAIAgent2 aiAgent2 = (SnakeAIAgent2) environment.getAgents().get(0);
                                 aiAgent2.setWeights(mainFrame.getBestInRun().getGenome());
                             }
-                            environment.simulateAI();
                             environmentUpdated();
+                            environment.simulateAI();
+                        }
+                    }else if(type == 4){
+                            for (int i = 0; i < environmentSimulations; i++) {
+                                environment.initialize(i);
+                                if(mainFrame.getBestInRun() != null ){
+                                    SnakeAIAgent aiAgent = (SnakeAIAgent) environment.getAgents().get(0);
+                                    SnakeAIAgent aiAgent2 = (SnakeAIAgent) environment.getAgents().get(1);
+                                    aiAgent.setWeights(mainFrame.getBestInRun().getGenome());
+                                    aiAgent2.setWeights(mainFrame.getBestInRun().getGenome());
+                                }
+                                environmentUpdated();
+                                environment.simulateAI();
+                            }
+                    }else if(type == 5){
+                        for (int i = 0; i < environmentSimulations; i++) {
+                            environment.initialize(i);
+                            if(mainFrame.getBestInRun() != null ){
+                                SnakeAIAgent aiAgent = (SnakeAIAgent) environment.getAgents().get(0);
+                                SnakeAIAgent2 aiAgent2 = (SnakeAIAgent2) environment.getAgents().get(1);
+
+                                double[] weights1 = new double[9*10+(10+1)*4];
+                                double[] weights2 = new double[13*15+(15+1)*8];
+                                double[] genome = mainFrame.getBestInRun().getGenome();
+                                System.arraycopy(genome, 0, weights1,0,weights1.length);
+                                System.arraycopy(genome, weights1.length, weights2,0,weights2.length);
+                                aiAgent.setWeights(weights1);
+                                aiAgent2.setWeights(weights2);
+                            }
+                            environmentUpdated();
+                            environment.simulateAI();
                         }
                     }
 
@@ -139,7 +169,7 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
         g.drawImage(image, GRID_TO_PANEL_GAP, GRID_TO_PANEL_GAP, null);
 
         try {
-            Thread.sleep(100);
+            Thread.sleep(50);
         } catch (InterruptedException ignore) {
         }
     }

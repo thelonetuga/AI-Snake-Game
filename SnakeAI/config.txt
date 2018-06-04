@@ -1,32 +1,32 @@
 Runs: 10
 
-Population size: 1000
+Population size: 50 
 
-Max generations: 1500
+Max generations: 500
 
 //--------------------------------
 
 Selection: tournament
 
-Tournament size: 2
+Tournament size: 4, 6, 10, 16, 32
 
 //--------------------------------
 
 Recombination: one_cut
 
-Recombination probability: 0.7
+Recombination probability: 0.4, 0.6, 0.85
 
 //--------------------------------
 
 Mutation: uniform_distribution
 
-Mutation probability: 0.1
+Mutation probability: 0.05, 0.1, 0.5, 0.8
 
 Delta: 0.02
 
 //--------------------------------
 
-Problem file: ./DataSets/DataSet1.txt
+Problem file: /home/joaoecko/Documents/inteligencia artificial/Projeto/IAProject/SnakeAI/DataSets/DataSetAI2.txt
 
 //--------------------------------
 

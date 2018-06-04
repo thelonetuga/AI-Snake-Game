@@ -1,5 +1,6 @@
 package snake.snakeAI;
 
+import snake.Environment;
 import snake.snakeAI.ga.experiments.*;
 import snake.snakeAI.ga.GAListener;
 import snake.snakeAI.ga.GeneticAlgorithm;
@@ -65,7 +66,7 @@ public class SnakeExperimentsFactory extends ExperimentsFactory {
         double mutationProbability = Double.parseDouble(getParameterValue("Mutation probability"));
         if (getParameterValue("Mutation").equals("uniform_distribution")) {
             //TODO OTHER PARAMETERS TO YOUR MUTATION OPERATOR, IF THEY EXIST, ARE FETCHED HERE
-            mutation = new MutationSuperCool<>(mutationProbability /*TODO COMPLETE?*/, random);
+            mutation = new MutationSuperCool<>(mutationProbability /*TODO COMPLETE?*/);
         }
 
         //PROBLEM 

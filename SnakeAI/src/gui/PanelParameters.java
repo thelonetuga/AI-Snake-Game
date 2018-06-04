@@ -22,11 +22,11 @@ public class PanelParameters extends PanelAtributesValue {
     private Environment environment;
 
     // TODO MODIFY TO CHANGE THE DEFAULT PARAMETER VALUES
-    public static final String SEED = "1";
-    public static final String POPULATION_SIZE = "500";
-    public static final String GENERATIONS = "2000";
-    public static final String TOURNAMENT_SIZE = "4";
-    public static final String PROB_RECOMBINATION = "0.9";
+    public static final String SEED = "50";
+    public static final String POPULATION_SIZE = "50";
+    public static final String GENERATIONS = "1000";
+    public static final String TOURNAMENT_SIZE = "6";
+    public static final String PROB_RECOMBINATION = "0.85";
     public static final String PROB_MUTATION = "0.05";
 
     JTextField textFieldSeed = new JTextField(SEED, TEXT_FIELD_LENGHT);
@@ -39,8 +39,6 @@ public class PanelParameters extends PanelAtributesValue {
     JComboBox comboBoxRecombinationMethods = new JComboBox(recombinationMethods);
     JTextField textFieldProbRecombination = new JTextField(PROB_RECOMBINATION, TEXT_FIELD_LENGHT);
     JTextField textFieldProbMutation = new JTextField(PROB_MUTATION, TEXT_FIELD_LENGHT);
-    String[] snakeType = {"Snake Adhoc", "Snake Random", "Snake AI ", "Snake AI 2", "Snakes Diferent", "Snakes Equal"};
-    JComboBox comboBoxSnakeType = new JComboBox(snakeType);
     //TODO - MORE PARAMETERS?
 
     public PanelParameters() {
@@ -74,10 +72,6 @@ public class PanelParameters extends PanelAtributesValue {
 
         labels.add(new JLabel("Mutation prob.: "));
         valueComponents.add(textFieldProbMutation);
-
-        labels.add(new JLabel("Tipo de Cobra: "));
-        valueComponents.add(comboBoxSnakeType);
-
         //TODO - MORE PARAMETERS?
         configure();
     }
@@ -119,7 +113,7 @@ public class PanelParameters extends PanelAtributesValue {
     public Mutation<SnakeIndividual> getMutationMethod() {
         double mutationProbability = Double.parseDouble(textFieldProbMutation.getText());
         //TODO
-        return new MutationSuperCool<>(mutationProbability/*TODO?*/, new Random());
+        return new MutationSuperCool<>(mutationProbability/*TODO?*/);
     }
 }
 

@@ -55,11 +55,6 @@ public class GeneticAlgorithm<I extends Individual, P extends Problem<I>> {
                 bestInRun = (I) bestInGen.clone();
             }
             t++;
-
-            if (t == 200) {
-                System.out.println("debug");
-            }
-
             fireGenerationEnded(new GAEvent(this));
         }
         fireRunEnded(new GAEvent(this));

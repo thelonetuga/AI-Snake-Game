@@ -18,6 +18,7 @@ public class Environment {
     private final List<SnakeAgent> agents;
     private final int numOutputs;
     private final int numInputs;
+
     private Food food ;
     private final int maxIterations;
     private final int type;
@@ -84,17 +85,15 @@ public class Environment {
                     break;
                 case 4:
                     SnakeAIAgent snakeEqual = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
+                    SnakeAIAgent snakeEqual2 = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
                     agents.add(snakeEqual);
-
-                    snakeEqual = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
-                    agents.add(snakeEqual);
+                    agents.add(snakeEqual2);
                     break;
                 case 5:
                     SnakeAIAgent snakeDiferent = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
+                    SnakeAIAgent2 snakeDiferent2 = new SnakeAIAgent2(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), 13,10,8,Environment.this);
                     agents.add(snakeDiferent);
-
-                    snakeDiferent = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
-                    agents.add(snakeDiferent);
+                    agents.add(snakeDiferent2);
                     break;
             }
     }
@@ -129,15 +128,21 @@ public class Environment {
     }
 
     public int[] simulateAI() {
-        int[] vetorEstatisticas = new int[2];
+        int[] vetorEstatisticas = new int[3];
         for (int i = 0; i < maxIterations; i++){
             for (SnakeAgent agent: agents){
                 if(!agent.isKilled()) {
                     agent.act(this);
                     fireUpdatedEnvironment();
                 }else{
-                    vetorEstatisticas[0] = i;
-                    vetorEstatisticas[1] = getNumFood();
+                    if (type == 5){
+                        vetorEstatisticas[0] = i;
+                        vetorEstatisticas[1] = getNumFood_1();
+                        vetorEstatisticas[2] = getNumFood_2();
+                    }else{
+                        vetorEstatisticas[0] = i;
+                        vetorEstatisticas[1] = getNumFood();
+                    }
                     return vetorEstatisticas;
                 }
             }
@@ -145,6 +150,18 @@ public class Environment {
         fireUpdatedEnvironment();
         return vetorEstatisticas;
     }
+
+    public int getNumMovs() {
+        return numMov;
+    }
+
+    public int getNumFood_1(){
+        return agents.get(0).getfoodTwoDiferent();
+    }
+    public int getNumFood_2(){
+        return agents.get(1).getfoodTwoDiferent();
+    }
+
     public List<SnakeAgent> getAgents() {
         return agents;
     }

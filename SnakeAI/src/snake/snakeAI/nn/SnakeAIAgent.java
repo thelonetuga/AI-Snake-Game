@@ -69,7 +69,6 @@ public class SnakeAIAgent extends SnakeAgent {
      */
     public void setWeights(double[] weights) {
         int w = 0;
-
         //percorrer os pesos w1
         for (int i = 0; i < inputLayerSize; i++) {
             for (int j = 0; j < hiddenLayerSize; j++) {
@@ -105,7 +104,7 @@ public class SnakeAIAgent extends SnakeAgent {
             for (int j = 0; j < hiddenLayerSize+1; j++) {
                 soma+=hiddenLayerOutput[j]*w2[j][i];
             }
-            output[i]=sigmoide(soma);
+            output[i]=soma;
         }
     }
 

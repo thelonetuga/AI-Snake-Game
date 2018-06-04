@@ -10,6 +10,7 @@ public abstract class SnakeAgent {
     protected Environment environment;
     private LinkedList<Tail> tails;
     private boolean killed;
+    protected int numFoods;
 
     public SnakeAgent(Cell cell, Color color, Environment environment) {
         this.cell = cell;
@@ -18,6 +19,11 @@ public abstract class SnakeAgent {
         this.tails=new LinkedList<>();
         this.environment = environment;
         killed = false;
+        numFoods = 0;
+    }
+
+    public int getfoodTwoDiferent() {
+        return numFoods;
     }
 
     public void act(Environment environment)  {
@@ -52,7 +58,9 @@ public abstract class SnakeAgent {
                 Tail tail = new Tail(cell);
                 tails.addFirst(tail);
                 cell.setTail(tail);
-
+                nextCell.setFood(null);
+                environment.placeFood();
+                numFoods++;
             }
             if (!tails.isEmpty()) {
                 tails.getLast().getCell().setTail(null);
@@ -62,13 +70,13 @@ public abstract class SnakeAgent {
                 cell.setTail(tail);
             }
             setCell(nextCell);
-            if(nextCell.hastFood()) {
-                nextCell.setFood(null);
-                environment.placeFood();
-            }
         }else{
             killed = true;
         }
+    }
+
+    public LinkedList<Tail> getTails() {
+        return tails;
     }
 
     public boolean isKilled(){

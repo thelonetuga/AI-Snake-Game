@@ -32,7 +32,7 @@ public class SnakeAIAgent2 extends SnakeAgent {
     final private double[] output;
 
     public SnakeAIAgent2(Cell cell, int inputLayerSize, int hiddenLayerSize, int outputLayerSize, Environment environment) {
-        super(cell, Color.YELLOW, environment);
+        super(cell, Color.CYAN, environment);
         this.inputLayerSize = inputLayerSize;
         this.hiddenLayerSize = hiddenLayerSize;
         this.outputLayerSize = outputLayerSize;
@@ -101,7 +101,7 @@ public class SnakeAIAgent2 extends SnakeAgent {
             for (int j = 0; j < hiddenLayerSize+1; j++) {
                 soma+=hiddenLayerOutput[j]*w2[j][i];
             }
-            output[i]=sigmoide(soma);
+            output[i] = soma;
         }
     }
 
@@ -167,7 +167,6 @@ public class SnakeAIAgent2 extends SnakeAgent {
 
             }
         }
-
 
         if ( lineCell > lineFood) {
             inputs[8] = 1;
