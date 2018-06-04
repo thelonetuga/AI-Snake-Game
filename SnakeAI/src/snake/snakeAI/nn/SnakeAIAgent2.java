@@ -124,22 +124,22 @@ public class SnakeAIAgent2 extends SnakeAgent {
         int columnFood = food.getCell().getColumn();
 
 
-        if (north != null && !north.hasAgent() && !north.hasTail()) {
+        if (north != null && !north.hasAgent() && !north.hasTail() && lineCell > lineFood) {
             inputs[0] = 1;
         } else {
             inputs[0] = 0;
         }
-        if (south != null && !south.hasAgent() && !south.hasTail()) {
+        if (south != null && !south.hasAgent() && !south.hasTail() && lineCell < lineFood) {
             inputs[1] = 1;
         } else {
             inputs[1] = 0;
         }
-        if (west != null && !west.hasAgent() && !west.hasTail()) {
+        if (west != null && !west.hasAgent() && !west.hasTail() && columnCell > columnFood) {
             inputs[2] = 1;
         } else {
             inputs[2] = 0;
         }
-        if (east != null && !east.hasAgent() && !east.hasTail()) {
+        if (east != null && !east.hasAgent() && !east.hasTail() && columnCell < columnFood) {
             inputs[3] = 1;
         } else {
             inputs[3] = 0;
@@ -150,22 +150,24 @@ public class SnakeAIAgent2 extends SnakeAgent {
             inputs[4] = 0;
         } else {
             inputs[4] = 1;
-            if (east != null && !east.hasTail() && !east.hasAgent()) {
-                inputs[5] = 0;
-            } else {
-                inputs[5] = 1;
-                if (west != null && !west.hasTail() && !west.hasAgent()) {
-                    inputs[6] = 0;
-                } else {
-                    inputs[6] = 1;
-                    if (north != null && !north.hasTail() && !north.hasAgent()) {
-                        inputs[7] = 0;
-                    } else {
-                        inputs[7] = 1;
-                    }
-                }
+        }
 
-            }
+        if (east != null && !east.hasTail() && !east.hasAgent()) {
+            inputs[5] = 0;
+        } else {
+            inputs[5] = 1;
+        }
+
+        if (west != null && !west.hasTail() && !west.hasAgent()) {
+            inputs[6] = 0;
+        } else {
+            inputs[6] = 1;
+        }
+
+        if (north != null && !north.hasTail() && !north.hasAgent()) {
+            inputs[7] = 0;
+        } else {
+            inputs[7] = 1;
         }
 
         if ( lineCell > lineFood) {

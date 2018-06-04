@@ -2,10 +2,10 @@ package snake.snakeAI.nn;
 
 import snake.*;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class SnakeAIAgent extends SnakeAgent {
-   
+
     final private int inputLayerSize;
     final private int hiddenLayerSize;
     final private int outputLayerSize;
@@ -64,7 +64,7 @@ public class SnakeAIAgent extends SnakeAgent {
 
     /**
      * Initializes the network's weights
-     * 
+     *
      * @param weights vector of weights comming from the individual.
      */
     public void setWeights(double[] weights) {
@@ -76,44 +76,43 @@ public class SnakeAIAgent extends SnakeAgent {
             }
         }
         //percorrer os pesos w2
-        for (int i = 0; i < hiddenLayerSize+1; i++) {
+        for (int i = 0; i < hiddenLayerSize + 1; i++) {
             for (int j = 0; j < outputLayerSize; j++) {
                 w2[i][j] = weights[w++];
             }
         }
 
     }
-    
+
     /**
      * Computes the output of the network for the inputs saved in the class
      * vector "inputs".
-     *
      */
     private void forwardPropagation() {
         float soma;
         for (int i = 0; i < hiddenLayerSize; i++) {
-            soma=0;
+            soma = 0;
             for (int j = 0; j < inputLayerSize; j++) {
-                soma+=inputs[j]*w1[j][i];
+                soma += inputs[j] * w1[j][i];
             }
-            hiddenLayerOutput[i]=sigmoide(soma);
+            hiddenLayerOutput[i] = sigmoide(soma);
         }
 
         for (int i = 0; i < outputLayerSize; i++) {
-            soma=0;
-            for (int j = 0; j < hiddenLayerSize+1; j++) {
-                soma+=hiddenLayerOutput[j]*w2[j][i];
+            soma = 0;
+            for (int j = 0; j < hiddenLayerSize + 1; j++) {
+                soma += hiddenLayerOutput[j] * w2[j][i];
             }
-            output[i]=soma;
+            output[i] = soma;
         }
     }
 
-    public double sigmoide(float soma){
-        return 1/(1+Math.pow(Math.E, -soma));
+    public double sigmoide(float soma) {
+        return 1 / (1 + Math.pow(Math.E, -soma));
     }
 
     @Override
-    protected Action decide(Perception perception)  {
+    protected Action decide(Perception perception) {
         Cell north = perception.getN();
         Cell east = perception.getE();
         Cell south = perception.getS();
@@ -150,44 +149,47 @@ public class SnakeAIAgent extends SnakeAgent {
 
 
         if (south != null && !south.hasTail() && !south.hasAgent()) {
-                inputs[4] = 0;
+            inputs[4] = 0;
         } else {
-                inputs[4] = 1;
-                if (east != null && !east.hasTail() && !east.hasAgent()) {
-                    inputs[5] = 0;
-                } else {
-                    inputs[5] = 1;
-                    if (west != null && !west.hasTail() && !west.hasAgent()) {
-                        inputs[6] = 0;
-                    } else {
-                        inputs[6] = 1;
-                        if (north != null && !north.hasTail() && !north.hasAgent()) {
-                            inputs[7] = 0;
-                        } else {
-                            inputs[7] = 1;
-                        }
-                    }
-
-                }
+            inputs[4] = 1;
         }
+
+        if (east != null && !east.hasTail() && !east.hasAgent()) {
+            inputs[5] = 0;
+        } else {
+            inputs[5] = 1;
+        }
+
+        if (west != null && !west.hasTail() && !west.hasAgent()) {
+            inputs[6] = 0;
+        } else {
+            inputs[6] = 1;
+        }
+
+        if (north != null && !north.hasTail() && !north.hasAgent()) {
+            inputs[7] = 0;
+        } else {
+            inputs[7] = 1;
+        }
+
 
         forwardPropagation();
         double max = output[0];
         int pos = 0;
-        for (int i = 0; i < output.length ; i++) {
-            if (output[i] > max){
+        for (int i = 0; i < output.length; i++) {
+            if (output[i] > max) {
                 max = output[i];
                 pos = i;
             }
         }
 
-        if ( pos == 0 ) {
+        if (pos == 0) {
             return Action.NORTH;
         } else if (pos == 1) {
             return Action.SOUTH;
-        } else if (pos == 2 ) {
+        } else if (pos == 2) {
             return Action.EAST;
-        } else if (pos == 3 ) {
+        } else if (pos == 3) {
             return Action.WEST;
         }
 

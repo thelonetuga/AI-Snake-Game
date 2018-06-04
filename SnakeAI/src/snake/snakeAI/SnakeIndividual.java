@@ -92,9 +92,10 @@ public class SnakeIndividual extends RealVectorIndividual<SnakeProblem, SnakeInd
         sb.append(numMov/problem.getNumEvironmentSimulations());
         sb.append("\nNumber of Foods : ");
         sb.append(numFoods/problem.getNumEvironmentSimulations());
-        sb.append("\nNumber of Foods Snake 2: ");
-        sb.append(numFoods_2/problem.getNumEvironmentSimulations());
-
+        if(problem.getEnvironment().getType() == 5){
+            sb.append("\nNumber of Foods Snake 2: ");
+            sb.append(numFoods_2/problem.getNumEvironmentSimulations());
+        }
         return sb.toString();
     }
 

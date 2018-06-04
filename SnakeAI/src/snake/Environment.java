@@ -91,7 +91,7 @@ public class Environment {
                     break;
                 case 5:
                     SnakeAIAgent snakeDiferent = new SnakeAIAgent(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), numInputs,numHiddenUnits,numOutputs,Environment.this);
-                    SnakeAIAgent2 snakeDiferent2 = new SnakeAIAgent2(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), 13,10,8,Environment.this);
+                    SnakeAIAgent2 snakeDiferent2 = new SnakeAIAgent2(getCell(random.nextInt(grid.length), random.nextInt(grid.length)), 13,15,4,Environment.this);
                     agents.add(snakeDiferent);
                     agents.add(snakeDiferent2);
                     break;
